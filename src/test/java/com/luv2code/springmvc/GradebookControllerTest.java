@@ -21,7 +21,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.servlet.ModelAndView;
-import org.thymeleaf.spring5.expression.Mvc;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,7 +32,7 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@TestPropertySource("/application.properties")
+@TestPropertySource("/application-test.properties")
 @AutoConfigureMockMvc
 @SpringBootTest
 class GradebookControllerTest {
@@ -300,10 +299,10 @@ class GradebookControllerTest {
     public void deleteNonValidGradeHttpRequest() throws Exception {
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
                         .get("/grades/{id}/{gradeType}", 1, "literature"))
-                        .andExpect(status().isOk()).andReturn();
+                .andExpect(status().isOk()).andReturn();
 
         ModelAndView mav = mvcResult.getModelAndView();
-        ModelAndViewAssert.assertViewName(mav,"error");
+        ModelAndViewAssert.assertViewName(mav, "error");
     }
 
 
